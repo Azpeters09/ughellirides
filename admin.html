@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>UghelliRides Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#F6F7F9; --surface:#fff; --ink:#14181F; --muted:#6B7280; --line:#E5E7EB; --navy:#101826; --accent:#B08A3E; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--ink); }
+  .top { background:var(--navy); color:#fff; padding:16px 28px; display:flex; justify-content:space-between; align-items:center; }
+  .top h1 { font-size:17px; font-weight:600; }
+  .top button { background:rgba(255,255,255,.12); border:none; color:#fff; padding:8px 18px; border-radius:8px; cursor:pointer; font-family:inherit; font-size:13px; }
+  .wrap { max-width:1200px; margin:0 auto; padding:28px 24px; }
+  .login-card { max-width:420px; margin:80px auto; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:36px; }
+  .login-card h2 { margin-bottom:6px; font-size:20px; }
+  .login-card p { color:var(--muted); font-size:13.5px; margin-bottom:22px; }
+  .login-card input { width:100%; height:48px; border:1.5px solid var(--line); border-radius:10px; padding:0 14px; font-size:15px; margin-bottom:14px; }
+  .login-card button { width:100%; height:48px; background:var(--ink); color:#fff; border:none; border-radius:10px; font-size:15px; font-weight:600; cursor:pointer; }
+  .tabs { display:flex; gap:8px; margin-bottom:22px; flex-wrap:wrap; }
+  .tab { padding:10px 22px; border-radius:100px; border:1px solid var(--line); background:var(--surface); cursor:pointer; font-size:14px; font-weight:500; font-family:inherit; }
+  .tab.active { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:14px; margin-bottom:26px; }
+  .stat { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:18px 20px; }
+  .stat b { display:block; font-size:26px; font-weight:700; }
+  .stat span { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
+  table { width:100%; border-collapse:collapse; background:var(--surface); border-radius:12px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,.05); }
+  th { text-align:left; padding:13px 16px; background:#FAFBFC; font-size:11px; letter-spacing:1.4px; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--line); white-space:nowrap; }
+  td { padding:13px 16px; border-bottom:1px solid #F0F1F3; font-size:13.5px; vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  tr:hover td { background:#FAFBFC; }
+  .badge { display:inline-block; padding:3px 10px; border-radius:100px; font-size:11px; font-weight:600; }
+  .badge.pending { background:#FEF3C7; color:#92400E; }
+  .badge.verified, .badge.active { background:#D1FAE5; color:#065F46; }
+  .badge.rejected { background:#FEE2E2; color:#991B1B; }
+  .empty { text-align:center; padding:60px; color:var(--muted); }
+  .ref { font-weight:600; color:var(--accent); }
+  @media(max-width:720px){ .wrap{padding:16px} td,th{padding:10px 12px; font-size:12.5px} }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <h1>🚗 UghelliRides — Admin Console</h1>
+  <button onclick="logout()">Log out</button>
+</div>
+
+<div class="login-card" id="loginView">
+  <h2>Admin access</h2>
+  <p>Enter the admin token to view registrations and bookings.</p>
+  <input type="password" id="tokenInput" placeholder="Admin token" onkeydown="if(event.key==='Enter')login()">
+  <button onclick="login()">Unlock dashboard</button>
+</div>
+
+<div class="wrap" id="dashView" style="display:none">
+  <div class="stats" id="stats"></div>
+  <div class="tabs">
+    <button class="tab active" data-t="bookings" onclick="showTab('bookings',this)">Bookings</button>
+    <button class="tab" data-t="vehicles" onclick="showTab('vehicles',this)">Vehicles</button>
+    <button class="tab" data-t="drivers" onclick="showTab('drivers',this)">Drivers</button>
+    <button class="tab" onclick="exportCsv()">⬇ Export CSV</button>
+  </div>
+  <div id="tableWrap"></div>
+</div>
+
+<script>
+let TOKEN = sessionStorage.getItem('adminToken') || '';
+let current = 'bookings';
+let cache = {};
+
+function login(){
+  TOKEN = document.getElementById('tokenInput').value.trim();
+  fetch('/api/admin/bookings', { headers:{ Authorization:'Bearer '+TOKEN } })
+    .then(r => { if(!r.ok) throw new Error('Invalid token'); return r.json(); })
+    .then(() => {
+      sessionStorage.setItem('adminToken', TOKEN);
+      document.getElementById('loginView').style.display='none';
+      document.getElementById('dashView').style.display='block';
+      loadAll();
+    })
+    .catch(() => alert('Invalid token. Check server console for the current token.'));
+}
+function logout(){ sessionStorage.removeItem('adminToken'); location.reload(); }
+
+async function loadAll(){
+  const tables = ['bookings','vehicles','drivers'];
+  for (const t of tables){
+    cache[t] = await fetch('/api/admin/'+t, { headers:{Authorization:'Bearer '+TOKEN} }).then(r=>r.json());
+  }
+  renderStats();
+  showTab(current, document.querySelector('.tab.active'));
+}
+
+function renderStats(){
+  const s = document.getElementById('stats');
+  s.innerHTML = `
+    <div class="stat"><b>${cache.bookings.count}</b><span>Bookings</span></div>
+    <div class="stat"><b>${cache.vehicles.count}</b><span>Vehicle listings</span></div>
+    <div class="stat"><b>${cache.drivers.count}</b><span>Driver applications</span></div>
+    <div class="stat"><b>${cache.bookings.rows.filter(r=>r.status==='new').length}</b><span>New bookings</span></div>`;
+}
+
+function showTab(t, btn){
+  current = t;
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  const rows = cache[t].rows;
+  const wrap = document.getElementById('tableWrap');
+  if(!rows.length){ wrap.innerHTML = `<div class="empty">No ${t} yet.</div>`; return; }
+
+  let cols, fmt;
+  if(t==='bookings'){
+    cols = ['Ref','Name','Phone','Route','When','Service','Status'];
+    fmt = r => `<tr><td class="ref">BK-${String(r.id).padStart(5,'0')}</td><td>${esc(r.customer_name)}</td><td><a href="tel:${esc(r.phone)}">${esc(r.phone)}</a></td><td>${esc(r.pickup)} → ${esc(r.destination)}</td><td>${esc(r.pickup_time||'—')}</td><td>${esc(r.service_type||'—')}</td><td><span class="badge ${r.status}">${r.status}</span></td></tr>`;
+  } else if(t==='vehicles'){
+    cols = ['Ref','Owner','Phone','Vehicle','Plate','Category','Papers','Status'];
+    fmt = r => `<tr><td class="ref">VH-${String(r.id).padStart(5,'0')}</td><td>${esc(r.owner_name)}</td><td><a href="tel:${esc(r.phone)}">${esc(r.phone)}</a></td><td>${esc(r.make_model)} (${r.year||''})</td><td>${esc(r.plate_number)}</td><td>${esc(r.category||'—')}</td><td style="font-size:11px">Lic:${shortDate(r.license_valid_until)}<br>Ins:${shortDate(r.insurance_valid_until)}<br>RW:${shortDate(r.roadworthiness_until)}</td><td><span class="badge ${r.status}" onclick="setStatus('${t}',${r.id},'verified')" style="cursor:pointer">${r.status}</span></td></tr>`;
+  } else {
+    cols = ['Ref','Name','Phone','Experience','License','Areas','Status'];
+    fmt = r => `<tr><td class="ref">DR-${String(r.id).padStart(5,'0')}</td><td>${esc(r.full_name)}</td><td><a href="tel:${esc(r.phone)}">${esc(r.phone)}</a></td><td>${esc(r.experience||'—')}</td><td>${esc(r.license_class||'—')}<br><small style="color:var(--muted)">exp ${shortDate(r.license_expiry)}</small></td><td style="max-width:220px">${esc((r.areas_known||'').slice(0,80))}</td><td><span class="badge ${r.status}" onclick="setStatus('${t}',${r.id},'verified')" style="cursor:pointer">${r.status}</span></td></tr>`;
+  }
+  wrap.innerHTML = `<table><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${rows.map(fmt).join('')}</tbody></table>`;
+}
+
+function setStatus(table,id,status){
+  fetch(`/api/admin/${table}/${id}/status`,{
+    method:'PATCH',
+    headers:{'Content-Type':'application/json',Authorization:'Bearer '+TOKEN},
+    body: JSON.stringify({status})
+  }).then(()=>loadAll());
+}
+
+function exportCsv(){
+  const rows = cache[current].rows;
+  if(!rows.length) return alert('Nothing to export');
+  const cols = Object.keys(rows[0]);
+  const csv = [cols.join(','), ...rows.map(r=>cols.map(c=>'"'+String(r[c]??'').replace(/"/g,'""')+'"').join(','))].join('\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download = `ughellirides-${current}-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+}
+
+const esc = s => String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shortDate = d => d ? String(d).slice(0,7) : '—';
+
+if(TOKEN){
+  document.getElementById('tokenInput').value = TOKEN;
+  login();
+}
+</script>
+</body>
+</html>

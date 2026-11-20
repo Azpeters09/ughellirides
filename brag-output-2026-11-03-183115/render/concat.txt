@@ -1,0 +1,6 @@
+file 'hook.mp4'
+file 'reveal.mp4'
+file 'highlight1.mp4'
+file 'highlight2.mp4'
+file 'highlight3.mp4'
+file 'outro.mp4'

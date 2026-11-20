@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/assets/favicon-64.png">
+<title>Become a Driver — UghelliRides</title>
+<meta name="description" content="Drive for Ughelli's premium clients. Steady bookings, weekly payouts and a verified badge — join the UghelliRides driver network.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F3EFE4;
+    --surface: #FBF9F3;
+    --ink: #16231E;
+    --ink-soft: #3A463F;
+    --muted: #5C675F;
+    --line: #E2DDCE;
+    --accent: #C9A24B;
+    --accent-deep: #A9853B;
+    --petrol: #0E1F1A;
+    --petrol-2: #16352B;
+    --navy: #0E1F1A;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.65; font-size: 16px; -webkit-font-smoothing: antialiased; }
+  .serif { font-family: 'Bricolage Grotesque', sans-serif; }
+  ::selection { background: var(--accent); color: var(--petrol); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  html { scrollbar-color: var(--accent) transparent; }
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); }
+
+  /* Nav */
+  header.nav { position: sticky; top: 0; z-index: 50; background: rgba(251,250,247,0.88); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+  .nav-inner { max-width: 1160px; margin: 0 auto; padding: 18px clamp(20px, 4vw, 48px); display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 21px; font-weight: 500; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+  .logo img { width: 38px; height: 38px; border-radius: 50%; }
+  .logo i { font-style: normal; color: var(--accent); }
+  nav.menu { display: flex; gap: 36px; align-items: center; }
+  nav.menu a { text-decoration: none; color: var(--ink-soft); font-size: 14.5px; font-weight: 450; transition: color .2s ease; }
+  nav.menu a:hover { color: var(--ink); }
+  nav.menu .cta { color: var(--bg); background: var(--ink); padding: 10px 24px; border-radius: 100px; font-weight: 550; transition: background .25s ease; }
+  nav.menu .cta:hover { background: var(--accent-deep); color: #fff; }
+  @media (max-width: 760px) { nav.menu a:not(.cta) { display: none; } }
+
+  /* Page hero */
+  .page-hero { background: var(--petrol); color: #fff; padding: clamp(56px, 9vw, 110px) 0; }
+  .page-hero .crumb { font-size: 13px; margin-bottom: 18px; color: rgba(255,255,255,.6); }
+  .page-hero .crumb a { color: var(--accent); text-decoration: none; }
+  .page-hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(32px, 5vw, 52px); font-weight: 500; letter-spacing: -0.5px; line-height: 1.1; }
+  .page-hero h1 em { font-style: normal; color: var(--accent); }
+  .page-hero p { color: rgba(255,255,255,.75); max-width: 56ch; margin-top: 16px; }
+  .fee-banner { display: inline-flex; gap: 10px; margin-top: 22px; background: rgba(201,162,75,.15); border: 1px solid rgba(201,162,75,.45); padding: 10px 22px; border-radius: 100px; font-size: 14px; color: #fff; }
+  .fee-banner b { color: #E4C87E; }
+
+  /* Form */
+  .wrap { max-width: 780px; margin: clamp(40px, 6vw, 64px) auto; padding: 0 clamp(20px, 4vw, 48px); }
+  .form-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(28px, 4vw, 40px); box-shadow: 0 12px 40px rgba(14,31,26,.06); }
+  .form-card h2 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 600; margin-bottom: 6px; }
+  .form-card .sub { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
+  .benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; }
+  .benefit { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 16px; text-align: center; }
+  .benefit b { display: block; font-size: 13px; color: var(--ink); margin-bottom: 4px; font-weight: 600; }
+  .benefit span { font-size: 12px; color: var(--muted); }
+  fieldset { border: none; margin-bottom: 28px; }
+  legend { font-family: 'Bricolage Grotesque', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-deep); margin-bottom: 16px; padding-top: 18px; border-top: 1px solid var(--line); width: 100%; }
+  fieldset:first-of-type legend { border-top: none; padding-top: 0; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
+  .field label .req { color: #c0392b; }
+  .field input, .field select, .field textarea {
+    width: 100%; height: 48px; border: 1.5px solid var(--line); border-radius: 10px;
+    padding: 0 14px; font-size: 15px; font-family: 'Inter', sans-serif; background: #fff; color: var(--ink);
+  }
+  .field textarea { height: 90px; padding: 12px 14px; resize: vertical; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+  .hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .check-row { display: flex; gap: 10px; align-items: flex-start; margin: 18px 0; }
+  .check-row input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--accent); }
+  .check-row label { font-size: 13px; color: var(--muted); }
+  .submit-btn { width: 100%; background: var(--ink); color: var(--bg); border: none; height: 56px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: background .25s ease; }
+  .submit-btn:hover { background: var(--accent-deep); color: #fff; }
+  @media (max-width: 640px) { .grid, .benefits { grid-template-columns: 1fr; } }
+
+  footer { background: var(--petrol); color: rgba(255,255,255,.6); padding: 44px 24px; text-align: center; margin-top: 40px; }
+  footer .f-logo { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 10px; }
+  footer .f-logo img { width: 40px; height: 40px; border-radius: 50%; }
+  footer .f-logo span { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; color: #fff; }
+  footer .f-logo span i { font-style: normal; color: #E4C87E; }
+  footer p { font-size: 13px; max-width: 44ch; margin: 0 auto; }
+  footer .soc { display: flex; gap: 10px; justify-content: center; margin-top: 18px; }
+  footer .soc a { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.65); transition: color .2s ease, border-color .2s ease; }
+  footer .soc a:hover { color: var(--accent); border-color: var(--accent); }
+  footer .cr { font-size: 12px; margin-top: 22px; opacity: .6; }
+  footer .cr a { color: #E4C87E; text-decoration: none; }
+</style>
+  <script>window.UGHELLI_GA_ID = "G-8V9V4HN6HF";</script>
+  <script src="/assets/analytics.js" defer></script>
+
+    <meta property="og:title" content="Become a Driver — UghelliRides">
+    <meta property="og:description" content="Drive for Ughelli's premium clients. Steady bookings, weekly payouts and a verified badge — join the UghelliRides driver network.">
+    <meta property="og:image" content="https://ughellirides.online/assets/hero-image.jpg">
+    <meta property="og:url" content="https://ughellirides.online/register-driver.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Become a Driver — UghelliRides">
+    <meta name="twitter:description" content="Drive for Ughelli's premium clients. Steady bookings, weekly payouts and a verified badge — join the UghelliRides driver network.">
+    <meta name="twitter:image" content="https://ughellirides.online/assets/hero-image.jpg">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="/"><img src="/assets/icon-512.png" alt="UghelliRides"><span>Ughelli<i>Rides</i></span></a>
+    <nav class="menu">
+      <a href="/#services">Services</a>
+      <a href="/fleet.html">Fleet</a>
+      <a href="/recruit-drivers.html">Drive &amp; Earn</a>
+      <a href="/about.html">About</a>
+      <a href="/faq.html">FAQ</a>
+      <a href="/contact.html">Contact</a>
+      <a class="cta" href="#" onclick="openBookingModal(); return false;">Book Now</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="crumb"><a href="/">← Back to UghelliRides</a></div>
+    <h1>Become a <em>driver</em></h1>
+    <p>Drive for Ughelli's premium clients. Daily bookings, weekly payouts, and a verified badge that sets you apart.</p>
+    <div class="fee-banner">📋 Annual registration — renewable yearly</div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="form-card">
+    <h2>Driver Registration Form</h2>
+    <p class="sub">Fill this in and our team will contact you within 24 hours to schedule your verification and driving assessment.</p>
+
+    <div class="benefits">
+      <div class="benefit"><b>📅 Daily Bookings</b><span>Matched to your area</span></div>
+      <div class="benefit"><b>💰 Flexible Payouts</b><span>Daily, weekly or monthly</span></div>
+      <div class="benefit"><b>🏅 Verified Badge</b><span>Priority dispatch</span></div>
+    </div>
+
+    <form onsubmit="submitForm(event)">
+      <fieldset>
+        <legend>Personal Information</legend>
+        <div class="grid">
+          <div class="field"><label>Full name <span class="req">*</span></label><input type="text" required placeholder="As it appears on your ID" name="full_name"></div>
+          <div class="field"><label>Phone (WhatsApp) <span class="req">*</span></label><input type="tel" required placeholder="0806 571 1644" name="phone"></div>
+          <div class="field"><label>Date of birth <span class="req">*</span></label><input type="date" required name="dob"></div>
+          <div class="field"><label>Gender</label>
+            <select name="gender"><option>Male</option><option>Female</option></select>
+          </div>
+          <div class="field"><label>City / Area <span class="req">*</span></label><input type="text" required placeholder="e.g. Ughelli" name="city"></div>
+          <div class="field"><label>Years of driving experience <span class="req">*</span></label>
+            <select name="experience" required><option value="">Select…</option><option>1–3 years</option><option>4–7 years</option><option>8–15 years</option><option>15+ years</option></select>
+          </div>
+        </div>
+        <div class="field"><label>Home address <span class="req">*</span></label><input type="text" required placeholder="Street, area, city" name="address"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Driving Credentials</legend>
+        <div class="grid">
+          <div class="field"><label>Driver's license class <span class="req">*</span></label>
+            <select name="license_class" required><option value="">Select…</option><option>Class B (cars)</option><option>Class C (bus/light truck)</option><option>Class D (heavy)</option></select>
+          </div>
+          <div class="field"><label>License expiry <span class="req">*</span></label><input type="month" required name="license_expiry"></div>
+          <div class="field"><label>NIN available? <span class="req">*</span></label>
+            <select name="nin_available" required><option>Yes</option><option>In process</option></select>
+          </div>
+          <div class="field"><label>Can you drive manual &amp; auto? <span class="req">*</span></label>
+            <select name="transmission_types" required><option>Both</option><option>Automatic only</option><option>Manual only</option></select>
+          </div>
+        </div>
+        <div class="field"><label>Areas you know well <span class="req">*</span></label>
+          <textarea name="areas_known" placeholder="e.g. Ughelli, Warri, Patani, Udu, Asaba routes…" required></textarea>
+        </div>
+        <p class="hint">Verification requires: valid driver's license, NIN. You'll upload passport photo and license scan during verification.</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Identification Documents</legend>
+        <div class="grid">
+          <div class="field"><label>Passport photo <span class="req">*</span></label><input type="file" required accept="image/*" name="passport_photo"></div>
+          <div class="field"><label>Driver's license scan <span class="req">*</span></label><input type="file" required accept="image/*" name="driver_license"></div>
+        </div>
+        <p class="hint">Upload clear color photos. Files must be under 2MB (JPEG/PNG). The originals must be presented at the driving assessment.</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Availability &amp; Payout</legend>
+        <div class="grid">
+          <div class="field"><label>Availability <span class="req">*</span></label>
+            <select name="availability" required><option>Full-time (daily)</option><option>Part-time (weekends)</option><option>Nights only</option><option>On-call</option></select>
+          </div>
+          <div class="field"><label>Payout method <span class="req">*</span></label>
+            <select name="payout_method" required><option value="">Select…</option><option>Bank transfer</option><option>OPay</option><option>Moniepoint</option></select>
+          </div>
+          <div class="field"><label>Account details <span class="req">*</span></label><input type="text" required name="account_details" placeholder="Bank name + account number"></div>
+          <div class="field"><label>Do you own a vehicle?</label>
+            <select name="owns_vehicle"><option>No — I'll drive partner cars</option><option>Yes — I'll also list my car</option></select>
+          </div>
+        </div>
+        <p class="hint">Payout is as agreed between the company and the driver or vehicle owner. Payment can be made daily, weekly or monthly.</p>
+      </fieldset>
+
+      <div class="check-row">
+        <input type="checkbox" id="terms2" required>
+        <label for="terms2">I confirm all information is accurate, consent to background &amp; license verification, and agree to the UghelliRides Driver Partner Terms.</label>
+      </div>
+
+      <input type="text" name="_website" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off"><!-- honeypot -->
+      <button type="submit" class="submit-btn">Submit Application</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo"><img src="/assets/icon-512.png" alt=""><span>Ughelli<i>Rides</i></span></div>
+  <p>Premium car rental &amp; hire in Ughelli — a service of Azpeters Consults.</p>
+  <div class="soc">
+    <a href="https://facebook.com/ughellirides" target="_blank" rel="noopener" aria-label="Facebook"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/></svg></a>
+    <a href="https://instagram.com/ughellirides" target="_blank" rel="noopener" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92C2.17 15.58 2.16 15.2 2.16 12c0-3.2.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95C23.73 2.7 21.31.27 16.95.07 15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.15A3.99 3.99 0 1 1 16 12a4 4 0 0 1-4 3.99zm6.41-11.85a1.44 1.44 0 1 0 1.43 1.44 1.44 1.44 0 0 0-1.43-1.44z"/></svg></a>
+    <a href="https://x.com/ughellirides" target="_blank" rel="noopener" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 1.15h7.59l5.24 6.93zm-1.29 19.5h2.04L6.49 3.24H4.3z"/></svg></a>
+    <a href="https://tiktok.com/@ughellirides" target="_blank" rel="noopener" aria-label="TikTok"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+    <a href="https://wa.me/2348065711644" target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.28-.2-.57-.35m-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.43 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.48-8.41z"/></svg></a>
+  </div>
+  <p class="cr">© 2026 UghelliRides · <a href="/">Back to home</a></p>
+</footer>
+
+<script>
+  async function submitForm(e) {
+    e.preventDefault();
+    const f = e.target;
+    const btn = f.querySelector('.submit-btn');
+    btn.disabled = true; btn.textContent = 'Submitting…';
+    const val = n => f.querySelector(`[name="${n}"]`)?.value || '';
+    const passport = f.passport_photo?.files?.[0]?.name || '';
+    const license = f.driver_license?.files?.[0]?.name || '';
+    const payload = {
+      full_name: val('full_name'), phone: val('phone'), dob: val('dob'),
+      gender: val('gender'), city: val('city'), address: val('address'),
+      experience: val('experience'), license_class: val('license_class'),
+      license_expiry: val('license_expiry'), nin_available: val('nin_available'),
+      transmission_types: val('transmission_types'), areas_known: val('areas_known'),
+      availability: val('availability'), payout_method: val('payout_method'), account_details: val('account_details'),
+      owns_vehicle: val('owns_vehicle'), _website: val('_website'),
+      passport_photo: passport,
+      driver_license: license
+    };
+    try {
+      const res = await fetch('/api/drivers', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if(!res.ok) throw new Error(data.error||'Failed');
+      alert(`✅ Application received!\n\nYour reference: ${data.reference}\n\nNext steps:\n1. Complete annual registration\n2. We'll call within 24h to schedule verification & driving assessment`);
+    } catch(err){
+      alert('Submission failed: '+err.message+'\n\nPlease WhatsApp +234 806 571 1644 instead.');
+    }
+    btn.disabled=false; btn.textContent='Submit Application';
+  }</script>
+
+<script src="/assets/booking-modal.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /register-driver.html
+Disallow: /register-vehicle.html
+Disallow: /recruit-drivers.html
+Disallow: /admin.html
+
+Sitemap: https://ughellirides.online/sitemap-ughellirides.xml

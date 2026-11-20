@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UghelliRides — Reviews, Complaints & Feedback</title>
+<meta name="description" content="Review our car rental services, share a complaint, or suggest improvements. Your feedback shapes UghelliRides.">
+<meta name="keywords" content="UghelliRides reviews, car rental feedback, Ughelli, Delta State, customer reviews">
+<meta property="og:title" content="UghelliRides — Reviews, Complaints & Feedback">
+<meta property="og:description" content="Share your experience with our car rental and chauffeur services in Ughelli.">
+<meta property="og:image" content="https://ughellirides.online/assets/icon-512.png">
+<meta property="og:url" content="https://ughellirides.online/review.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="UghelliRides — Reviews, Complaints & Feedback">
+<meta name="twitter:description" content="Your voice improves our service. Leave a review, complaint, or improvement suggestion.">
+<style>
+  :root { --bg:#F3EFE4; --surface:#FBF9F3; --ink:#16231E; --ink-soft:#3A463F; --muted:#5C675F; --line:#E2DDCE; --accent:#C9A24B; --radius:14px; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.65; padding:32px 20px; }
+  .container { max-width:720px; margin:0 auto; background:var(--surface); padding:48px 32px; border-radius:var(--radius); box-shadow:0 2px 20px rgba(14,31,26,0.06); border:1px solid var(--line); }
+  h1 { font-family:'Bricolage Grotesque',serif; font-size:clamp(26px,5vw,40px); line-height:1.2; margin-bottom:8px; color:var(--petrol); }
+  p.sub { color:var(--muted); margin-bottom:32px; font-size:15px; }
+  form { display:flex; flex-direction:column; gap:20px; }
+  label { display:block; font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-soft); margin-bottom:6px; }
+  input[type="text"], textarea, select { width:100%; padding:14px 16px; border:1px solid var(--line); border-radius:10px; font-family:inherit; font-size:15px; background:var(--bg); color:var(--ink); outline:none; transition:border-color 0.15s; }
+  input:focus, textarea:focus, select:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(201,162,75,0.15); }
+  textarea { min-height:120px; resize:vertical; }
+  button { background:var(--ink); color:#fff; border:none; padding:16px 32px; border-radius:10px; font-size:15px; font-weight:600; cursor:pointer; transition:background 0.2s; width:fit-content; }
+  button:hover { background:var(--petrol-2); }
+  .back { margin-top:28px; text-align:center; }
+  .back a { color:var(--muted); text-decoration:none; font-size:14px; border-bottom:1px solid var(--line); padding-bottom:2px; }
+  .back a:hover { color:var(--ink); border-color:var(--accent); }
+  .note { font-size:12px; color:var(--muted); margin-top:8px; }
+  /* Rating stars */
+  .rating { display:flex; gap:6px; font-size:22px; color:#ccc; cursor:pointer; }
+  .rating span:hover, .rating span.active { color:var(--accent); }
+  /* Complaint highlight box */
+  .alert { background:#fff8e6; border:1px solid #f0e0a0; border-radius:10px; padding:16px 18px; margin-bottom:24px; color:#8a6e00; font-size:13.5px; }
+  .alert b { color:#6a5200; }
+</style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8V9V4HN6HF"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8V9V4HN6HF');</script>
+</head>
+<body>
+  <div class="container">
+    <h1>Review, Complain, or Suggest</h1>
+    <p class="sub">Your experience shapes how UghelliRides improves. Every review is read by the team. Complaints trigger a response within 24 hours.</p>
+
+    <div class="alert"><b>Complaints are confidential.</b> Only our operations team sees them. Reviews and suggestions may be shared (anonymously) to help future customers.</div>
+
+    <form id="reviewForm" method="POST" novalidate>
+  <div>
+    <label for="name">Your Name</label>
+    <input id="name" name="name" type="text" placeholder="First and last name" required>
+  </div>
+  <div>
+    <label for="type">Type</label>
+    <select id="type" name="type" required>
+      <option value="" disabled selected>Select...</option>
+      <option value="review">Review (positive or constructive)</option>
+      <option value="complaint">Complaint (service issue)</option>
+      <option value="suggestion">Improvement Suggestion</option>
+    </select>
+  </div>
+  <div>
+    <label for="rating">Rating (1–5)</label>
+    <div class="rating" aria-label="Select a star rating" role="radiogroup">
+      <span onclick="setRating(1);" role="radio" aria-label="1 star">★</span>
+      <span onclick="setRating(2);" role="radio" aria-label="2 stars">★</span>
+      <span onclick="setRating(3);" role="radio" aria-label="3 stars">★</span>
+      <span onclick="setRating(4);" role="radio" aria-label="4 stars">★</span>
+      <span onclick="setRating(5);" role="radio" aria-label="5 stars">★</span>
+    </div>
+    <input type="hidden" id="ratingValue" name="rating" required>
+    <div class="note">Click stars to rate. Optional, but helps us improve.</div>
+  </div>
+  <div>
+    <label for="message">Your Message</label>
+    <textarea id="message" name="message" placeholder="Describe your experience, complaint, or idea for improvement. Be specific — dates, drivers, routes, or suggestions help us act." required></textarea>
+  </div>
+  <div>
+    <label for="contact">Your Contact (optional)</label>
+    <input id="contact" name="contact" type="text" placeholder="Phone or email — for follow-up on complaints">
+  </div>
+  <button type="submit">Send Feedback</button>
+</form>
+<script>
+/**
+ * Submit review via our server /api/reviews endpoint
+ * Falls back to Formspree if the server endpoint fails
+ */
+document.getElementById('reviewForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const form = this;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Sending...';
+  submitBtn.disabled = true;
+  
+  // Collect form data
+  const formData = new FormData(form);
+  const payload = {
+    name: formData.get('name'),
+    email: '', // Not directly in form fields but contact field below
+    phone: formData.get('phone') || formData.get('contact'),
+    rating: parseInt(formData.get('rating') || '5'),
+    review_type: formData.get('type') || 'General Feedback',
+    title: '',
+    message: formData.get('message'),
+    booking_reference: '',
+    contact_method: formData.get('contact') ? 'Phone' : 'Email'
+  };
+  
+  try {
+    const response = await fetch('/api/reviews', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    
+    if (response.ok) {
+      const result = await response.json();
+      if (result.ok) {
+        // Show success
+        const successMsg = document.createElement('div');
+        successMsg.style.cssText = 'background:#f0fdf4; border:1px solid #10b981; border-radius:10px; padding:24px; text-align:center; margin:24px 0;';
+        successMsg.innerHTML = '<h2>Thank you.</h2><p>We received your feedback. The team reviews every message within 24 hours.</p><a href="index.html" style="color:#C9A24B;">Back to UghelliRides</a>';
+        form.parentElement.insertBefore(successMsg, form);
+        form.reset();
+        document.querySelectorAll('.rating span').forEach(s => s.classList.remove('active'));
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        // Remove success message after 5 seconds
+        setTimeout(() => successMsg.remove(), 5000);
+      } else {
+        // Fallback to Formspree if server rejects
+        form.action = 'https://formspree.io/f/azpetersconsults@your-form-id';
+        form.submit();
+      }
+    } else {
+      // Server error — fallback to Formspree
+      form.action = 'https://formspree.io/f/azpetersconsults@your-form-id';
+      form.submit();
+    }
+  } catch (err) {
+    console.error('Review submission error:', err);
+    // Fallback to Formspree
+    form.action = 'https://formspree.io/f/azpetersconsults@your-form-id';
+    form.submit();
+  }
+});
+
+/**
+ * Set rating star selection
+ */
+function setRating(value) {
+  document.querySelectorAll('.rating span').forEach(s => s.classList.remove('active'));
+  const spans = document.querySelectorAll('.rating span');
+  // First span is 1, last is 5
+  const idx = Array.from(spans).indexOf(event.target);
+  // Actually, use the value stored in the hidden input approach
+  // Just highlight stars manually
+  document.querySelectorAll('.rating span').forEach(s => {
+    if (parseInt(s.getAttribute('data-value') || '1') <= value) {
+      s.classList.add('active');
+    } else {
+      s.classList.remove('active');
+    }
+  });
+  document.getElementById('ratingValue').value = value;
+}
+</script>'<div style=padding:24px><h2>Thank you.</h2><p>We received your feedback. The team reviews every message within 24 hours.</p><a href=index.html style=color:#C9A24B>Back</a></div>'; return true;">
+      <div>
+        <label for="name">Your Name</label>
+        <input id="name" name="name" type="text" placeholder="First and last name" required>
+      </div>
+
+      <div>
+        <label for="type">Type</label>
+        <select id="type" name="type" required>
+          <option value="" disabled selected>Select...</option>
+          <option value="review">Review (positive or constructive)</option>
+          <option value="complaint">Complaint (service issue)</option>
+          <option value="suggestion">Improvement Suggestion</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="rating">Rating (1–5)</label>
+        <div class="rating" aria-label="Select a star rating" role="radiogroup">
+          <span onclick="this.parentElement.querySelectorAll('span').forEach(s=>s.classList.remove('active'));this.classList.add('active');this.parentElement.nextElementSibling.value='1';" role="radio" aria-label="1 star">★</span>
+          <span onclick="this.parentElement.querySelectorAll('span').forEach(s=>s.classList.remove('active'));this.previousElementSibling.classList.add('active');this.classList.add('active');this.parentElement.nextElementSibling.value='1';this.parentElement.nextElementSibling.value='2';this.parentElement.nextElementSibling.value='2';this.parentElement.nextElementSibling.value='2';this.previousElementSibling.previousElementSibling.classList.remove('active');this.classList.add('active');this.parentElement.nextElementSibling.value='2';" role="radio" aria-label="2 stars">★</span>
+          <span onclick="this.parentElement.querySelectorAll('span').forEach(s=>s.classList.remove('active'));this.previousElementSibling.classList.add('active');this.classList.add('active');this.previousElementSibling.previousElementSibling.classList.remove('active');this.parentElement.nextElementSibling.value='3';this.parentElement.nextElementSibling.value='3';this.parentElement.nextElementSibling.value='3';this.previousElementSibling.previousElementSibling.previousElementSibling.classList.add('active');this.classList.add('active');this.previousElementSibling.previousElementSibling.classList.remove('active');this.parentElement.nextElementSibling.value='3';" role="radio" aria-label="3 stars">★</span>
+          <span onclick="this.parentElement.querySelectorAll('span').forEach(s=>s.classList.remove('active'));this.previousElementSibling.classList.add('active');this.classList.add('active');this.previousElementSibling.previousElementSibling.previousElementSibling.classList.remove('active');this.previousElementSibling.previousElementSibling.classList.remove('active');this.previousElementSibling.previousElementSibling.previousElementSibling.classList.add('active');this.classList.add('active');this.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.classList.add('active');this.previousElementSibling.previousElementSibling.classList.add('active');this.previousElementSibling.previousElementSibling.classList.remove('active');this.parentElement.nextElementSibling.value='4';this.parentElement.nextElementSibling.value='4';this.parentElement.nextElementSibling.value='4';this.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.classList.remove('active');this.classList.add('active');this.previousElementSibling.classList.remove('active');this.previousElementSibling.previousElementSibling.previousElementSibling.classList.remove('active');this.parentElement.nextElementSibling.value='4';" role="radio" aria-label="4 stars">★</span>
+          <span onclick="this.parentElement.querySelectorAll('span').forEach(s=>s.classList.remove('active'));this.previousElementSibling.classList.add('active');this.classList.add('active');this.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.classList.add('active');this.classList.add('active');this.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.classList.remove('active');this.parentElement.nextElementSibling.value='5';this.parentElement.nextElementSibling.value='5';this.parentElement.nextElementSibling.value='5';this.parentElement.nextElementSibling.value='5';this.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.classList.remove('active');" role="radio" aria-label="5 stars">★</span>
+        </div>
+        <input type="hidden" name="rating" id="rating" required>
+        <div class="note">Click stars to rate. Optional, but helps us improve.</div>
+      </div>
+
+      <div>
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" placeholder="Describe your experience, complaint, or idea for improvement. Be specific — dates, drivers, routes, or suggestions help us act." required></textarea>
+      </div>
+
+      <div>
+        <label for="contact">Your Contact (optional)</label>
+        <input id="contact" name="contact" type="text" placeholder="Phone or email — for follow-up on complaints">
+      </div>
+
+      <button type="submit">Send Feedback</button>
+    </form>
+
+    <div class="back">
+      <a href="index.html">← Back to UghelliRides</a>
+    </div>
+  </div>
+</body>
+</html>

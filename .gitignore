@@ -1,0 +1,22 @@
+# ── Secrets ──
+.env
+.env.*
+!.env.example
+
+# ── Dependencies ──
+node_modules/
+
+# ── Local SQLite database (fallback storage) ──
+data/*.db
+data/*.db-wal
+data/*.db-shm
+
+# ── Logs & runtime ──
+*.log
+npm-debug.log*
+.pm2/
+
+# ── OS / editor cruft ──
+.DS_Store
+Thumbs.db
+*.swp
